@@ -3,6 +3,7 @@
  import styled from "styled-components";
  import { Illustrations, Close } from "../assets";
  import { PrimaryButton } from "./Buttons";
+ import {useSpring, animated, config} from "react-spring";
 
  const ModalWrapper = styled.div`
     width: 800px;
@@ -42,8 +43,14 @@ const CloseModalButton = styled.button`
  padding: 0;
 `;
 
-export const SignUpModal = () => {
+export const SignUpModal = ({showModal, setShowModal}) => {
+    const animation = useSpring({
+        opacity: showModal ? 1 : 0,
+        transform: showModal ? `translateY(0)` : `translateY(-200%)`,
+        config: config.slow
+    });
     return(
+        <animated.div style={animation}>
         <ModalWrapper>
             <img src={Illustrations.signUp} alt="Sign up for an account" aria-hidden="true" />
             <SignUpHeader>Sign Up!</SignUpHeader>
@@ -53,5 +60,6 @@ export const SignUpModal = () => {
                 <Close />
             </CloseModalButton>
         </ModalWrapper>
+        </animated.div>
     )
 };

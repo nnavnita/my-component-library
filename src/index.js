@@ -8,6 +8,7 @@ import { ThemeProvider } from "styled-components";
 
 const App = () => {
     const [useDarkTheme, setUseDarkTheme] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     return(
         <ThemeProvider theme={useDarkTheme ? darkTheme : defaultTheme}>
             <button
@@ -35,7 +36,21 @@ const App = () => {
             onClick={() => setUseDarkTheme(false)}
         >
             Default theme
-        </button><br /><br />
+        </button>
+        <button
+            style={{
+            margin: "0 16px 24px",
+            padding: "8px",
+            background: "none",
+            cursor: "pointer",
+            border: "2px solid #000",
+            marginTop: "60px"
+            }}
+            onClick={() => setShowModal(!showModal)}
+        >
+           Toggle Modal
+        </button>
+        <br /><br />
         <div
         style={{
             background: useDarkTheme
@@ -46,7 +61,7 @@ const App = () => {
             "justify-content": "center"
         }}
         >
-        <SignUpModal />
+        <SignUpModal showModal={showModal} setShowModal={setShowModal} />
         </div>
         <GlobalStyle />
         </ThemeProvider>
